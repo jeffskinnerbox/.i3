@@ -1,0 +1,41 @@
+
+### ---------- Project Specific ---------- ###
+
+
+### ---------- General ---------- ###
+
+### Compiled Source ###
+*.pyc
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+### Packages ###
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+### Logs & Databases ###
+*.log
+*.sql
+*.sqlite
+
+### OS Generated Files ###
+*.out
+*.swp
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db

@@ -9,11 +9,27 @@
 # NOTE:
 # Should you change your keyboard layout at some point,
 # delete this file and re-run i3-config-wizard.
+#
+# Use this ste to find colors - http://www.infobyip.com/htmlcolorpicker.php
 
 
 
+# ---------------------------- General Environment -----------------------------
 # Mod1 = Alt,  Mod2 =  , Mod3 =  , Mod4 = Super/Win
 set $mod Mod1
+
+
+
+# ------------------------------ Fonts and Colors ------------------------------
+# border color of windows
+#new_window pixel 1
+#new_float pixel 1
+#hide_edge_borders both
+# class border backgr indicator
+#client.focused #9fbc00 #9fbc00 #111111
+#client.unfocused #444444 #444444 #315858
+#client.focused_inactive #444444 #444444 #2c2c2f
+#client.urgent #383a3b #383a3b #ee0000#
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -24,6 +40,8 @@ set $mod Mod1
 #font pango:DejaVu Sans Mono 10
 #font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 font -dosemu-vga-medium-r-normal--17-160-75-75-c-80-ibm-cp866        # we want to have a VT-style font :-)
+
+
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -95,6 +113,16 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+
+
+# ---------------------- Workspace Controls and Vairables ----------------------
+# As workspaces are defined multiple times in i3, assigning workspace variables can be helpful
+#set $WS1 term
+#set $WS2 web
+#set $WS3 misc
+#set $WS4 media
+#set $WS5 code
+
 # switch to workspace
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
@@ -118,6 +146,8 @@ bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
+
+
 
 # scratchpad
 bindsym $mod+Shift+minus move scratchpad
@@ -170,24 +200,73 @@ bar {
         }
 }
 
-# border color of windows
-#new_window pixel 1
-#new_float pixel 1
-#hide_edge_borders both
-# class border backgr indicator
-#client.focused #9fbc00 #9fbc00 #111111
-#client.unfocused #444444 #444444 #315858
-#client.focused_inactive #444444 #444444 #2c2c2f
-#client.urgent #383a3b #383a3b #ee0000
 
-# start chrome on workspace called 2:Web
-exec i3-msg 'workspace 2:Web; exec google-chrome https://mail.verizon.com/webmail/driver?nimlet=showmessages&view=emails#mail_Emails_INBOX https://mail.google.com/mail/u/0/#inbox \ https://us-mg5.mail.yahoo.com/neo/launch?.rand=55clqanieh50a https://getpocket.com/a/queue/ https://makersmiths.slack.com/messages/general/ http://google.com'
+
+# -------------------- Logout / Suspend / Reboot / Shutdown --------------------
+# http://www.circuidipity.com/i3-tiling-window-manager.html
+#set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
+#mode "$mode_system" {
+#    bindsym l exec --no-startup-id $Locker, mode "default"
+#    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+#    bindsym s exec --no-startup-id $Locker && sync && systemctl suspend, mode "default"
+#    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+#    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+#
+#    # back to normal: Enter or Escape
+#    bindsym Return mode "default"
+#    bindsym Escape mode "default"
+#}
+#bindsym $mod+Pause mode "$mode_system"
+
+
+
+
+# ------------------------ Arrange Containers / Windows ------------------------
+# Layout mode for new containers
+#workspace_layout tabbed
+
+# Enable floating mode
+#for_window [class="Remmina"] floating enable
+#for_window [class="Remmina"] border normal
+#for_window [class="VirtualBox"] floating enable
+#for_window [class="VirtualBox"] border normal
+#for_window [class="Vlc"] floating enable
+#for_window [class="Vlc"] border normal
+
+
+
+# -------------------------------- Screenshots ---------------------------------
+# Take screenshots using scrot and eog displays images: sudo apt-get install scrot eog
+## * desktop
+#bindsym --release Print exec --no-startup-id scrot '%Y-%m-%dT%H%M%S.png' -e 'mv $f ~/Downloads && eog ~/Downloads/$f'
+## * active Window
+#bindsym --release $mod+Print exec --no-startup-id scrot -d 4 -u -z '%Y-%m-%dT%H%M%S.png' -e 'mv $f ~/Downloads && eog ~/Downloads/$f'
+## * selected area... (click and move mouse)
+#bindsym --release Shift+Print exec --no-startup-id scrot -s '%Y-%m-%dT%H%M%S.png' -e 'mv $f ~/Downloads && eog ~/Downloads/$f'
+
+
+
+# -------------------------------- Lock Screen ---------------------------------
+# wait 10 minutes of inactivity before launching the screenlocker i3lock
+#exec --no-startup-id xautolock -time 10 -locker i3lock
+exec xautolock -time 10 -locker 'i3lock --color=806060 --beep --tiling --image $HOME/Pictures/Wallpaper/ZZ-Top-1920x1200.png'
 
 # set energy star feature to On and wait 2 minutes of inactivity to turn off the screens
 #exec --no-startup-id xset dpms 120
 exec xset dpms 120
-#
-# wait 10 minutes of inactivity before launching the screenlocker i3lock
-#exec --no-startup-id xautolock -time 10 -locker i3lock
-#exec xautolock -time 10 -locker 'i3lock --color=806060 --beep --tiling --image $HOME/Pictures/Wallpaper/Dark-Pattern-Wide-Wallpaper.png'
-exec xautolock -time 10 -locker 'i3lock --color=806060 --beep --tiling --image $HOME/Pictures/Wallpaper/ZZ-Top.png'
+
+
+
+# -------------------------- Auto-Start Applications ---------------------------
+# start terminal in workspace 1
+exec i3-msg 'workspace 1; exec gnome-terminal'
+
+# start chrome on workspace called 2:Web
+exec i3-msg 'workspace 2:Web; exec google-chrome https://mail.verizon.com/webmail/driver?nimlet=showmessages&view=emails#mail_Emails_INBOX'
+exec i3-msg 'exec google-chrome https://mail.google.com/mail/u/0/#inbox'
+exec i3-msg 'exec google-chrome https://us-mg5.mail.yahoo.com/neo/launch?.rand=55clqanieh50a https://getpocket.com/a/queue/'
+#exec i3-msg 'exec google-chrome https://makersmiths.slack.com/messages/general/ http://google.com'
+
+# start slack on workspace called 3:Chat
+exec i3-msg 'workspace 3:Chat; exec scudcloud'
+exec i3-msg 'exec gnome-terminal'

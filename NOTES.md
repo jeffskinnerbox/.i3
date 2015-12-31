@@ -11,15 +11,16 @@ via [git][01] and [GitHub][02].  For more information, check out these posts:
 Goto GitHub and create the new repository
 
     goto https://github.com/jeffskinnerbox
-    <create empty repository called '.bash'>
+    <create empty repository called '.i3'>
 
 ### Creating the Local Git Repository
-Make the .bash directory, move into it, and initialize it as a git repository
+Make the .i3 directory, move into it, and initialize it as a git repository
 
     cd ~
-    mkdir .bash
-    cd .bash
+    mkdir .i3
+    cd .i3
     git init
+
 Now create the README, bash_aliases, bash_logout, bash_profile, and bashrc files.
 
 Also create the file .gitignore like this:
@@ -71,10 +72,10 @@ Now commit the files to the git repository:
     git commit -m 'Initial creation of Bash scripts for Linux box'
 
 ### Loading the GitHub Repository for the First Time
-Within the ~.bash directory, use git to load the files to GitHub
+Within the ~/.i3 directory, use git to load the files to GitHub
 
-    cd ~/.bash
-    git remote add origin https://github.com/jeffskinnerbox/.bash.git
+    cd ~/.i3
+    git remote add origin https://github.com/jeffskinnerbox/.i3.git
     git push -u origin master
 
 ### Updating the Local Git Repository

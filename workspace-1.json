@@ -1,0 +1,48 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "normal",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 410,
+       "width": 642,
+       "x": 0,
+       "y": 0
+    },
+    "name": "jeff@desktop - /home/jeff/.i3",
+    "percent": 0.85,
+    "swallows": [
+       {
+       // "class": "^Gnome\\-terminal$",
+       // "instance": "^gnome\\-terminal$",
+       // "title": "^jeff\\@desktop\\ \\-\\ \\/home\\/jeff\\/\\.i3$",
+       // "transient_for": "^$",
+       // "window_role": "^gnome\\-terminal\\-window\\-23772\\-1441194473\\-1450064160$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "none",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 1182,
+       "width": 295,
+       "x": 1639,
+       "y": 16
+    },
+    "name": "Conky (desktop)",
+    "percent": 0.15,
+    "swallows": [
+       {
+       // "class": "^Conky$",
+       // "instance": "^Conky$",
+       // "title": "^Conky\\ \\(desktop\\)$",
+       // "transient_for": "^$"
+       }
+    ],
+    "type": "con"
+}
+

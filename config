@@ -47,17 +47,17 @@ font -dosemu-vga-medium-r-normal--17-160-75-75-c-80-ibm-cp866        # we want t
 floating_modifier $mod
 
 # start a terminal
-#bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec gnome-terminal
+#bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
+bindsym $mod+Return exec --no-startup-id gnome-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # lock screen
-bindsym Control+mod1+l exec i3lock
+bindsym Control+mod1+l exec --no-startup-id i3lock
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec --no-startup-id dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -75,6 +75,9 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
+
+
+# --------------------------- Move Position of Window --------------------------
 # move focused window
 bindsym $mod+Shift+j move left
 bindsym $mod+Shift+k move down
@@ -86,6 +89,8 @@ bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
+
+
 
 # split in horizontal orientation
 bindsym $mod+h split h
@@ -154,7 +159,7 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # function key binding
-bindsym $mod+F1 exec firefox
+bindsym $mod+F1 exec --no-startup-id firefox
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -163,8 +168,11 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
+
+
+# ---------------------------- Resze / Move Windows ----------------------------
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -246,27 +254,32 @@ bar {
 
 
 
-# -------------------------------- Lock Screen ---------------------------------
+# ----------------------- Set Background and Lock Screen -----------------------
 # wait 10 minutes of inactivity before launching the screenlocker i3lock
 #exec --no-startup-id xautolock -time 10 -locker i3lock
-exec xautolock -time 10 -locker 'i3lock --color=806060 --beep --tiling --image $HOME/Pictures/Wallpaper/ZZ-Top-1920x1200.png'
+exec --no-startup-id xautolock -time 10 -locker 'i3lock --color=806060 --beep --tiling --image $HOME/Pictures/Wallpaper/ZZ-Top-1920x1200.png'
 
 # set energy star feature to On and wait 2 minutes of inactivity to turn off the screens
 #exec --no-startup-id xset dpms 120
-exec xset dpms 120
+exec --no-startup-id xset dpms 120
+
+# set the background
+exec --no-startup-id "feh --bg-scale $HOME/Pictures/Wallpaper/Circuit-Board-Wallpaper.png"
 
 
 
-# -------------------------- Auto-Start Applications ---------------------------
+# --------------------- Auto-Start Layout and Applications ---------------------
 # start terminal in workspace 1
-exec i3-msg 'workspace 1; exec gnome-terminal'
+#exec --no-startup-id i3-msg 'workspace 1; exec --no-startup-id gnome-terminal'
+exec --no-startup-id "i3-msg 'workspace 1; append_layout $HOME/.i3/workspace-1.json'"
 
 # start chrome on workspace called 2:Web
-exec i3-msg 'workspace 2:Web; exec google-chrome https://mail.verizon.com/webmail/driver?nimlet=showmessages&view=emails#mail_Emails_INBOX'
-exec i3-msg 'exec google-chrome https://mail.google.com/mail/u/0/#inbox'
-exec i3-msg 'exec google-chrome https://us-mg5.mail.yahoo.com/neo/launch?.rand=55clqanieh50a https://getpocket.com/a/queue/'
-#exec i3-msg 'exec google-chrome https://makersmiths.slack.com/messages/general/ http://google.com'
+#exec --no-startup-id "i3-msg 'workspace 2:Web; exec --no-startup-id google-chrome https://mail.verizon.com/webmail/driver?nimlet=showmessages&view=emails#mail_Emails_INBOX'"
+#exec --no-startup-id "i3-msg 'exec --no-startup-id google-chrome https://mail.google.com/mail/u/0/#inbox'"
+#exec --no-startup-id "i3-msg 'exec --no-startup-id google-chrome https://us-mg5.mail.yahoo.com/neo/launch?.rand=55clqanieh50a https://getpocket.com/a/queue/'"
+#exec --no-startup-id "i3-msg 'exec --no-startup-id google-chrome https://makersmiths.slack.com/messages/general/ http://google.com'"
 
-# start slack on workspace called 3:Chat
-exec i3-msg 'workspace 3:Chat; exec scudcloud'
-exec i3-msg 'exec gnome-terminal'
+# start slack and a terminal on workspace called 3:Chat
+#exec --no-startup-id "i3-msg 'workspace 3:Chat; exec --no-startup-id scudcloud'"
+#exec --no-startup-id "i3-msg 'exec --no-startup-id gnome-terminal'"
+

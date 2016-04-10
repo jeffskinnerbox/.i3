@@ -6,7 +6,7 @@ via [git][01] and [GitHub][02].  For more information, check out these posts:
 * [Managing dot files with Git][04]
 
 ## Managing the Git Repository and GitHub
-===
+====
 ### Creating the GitHub Repository
 Goto GitHub and create the new repository
 

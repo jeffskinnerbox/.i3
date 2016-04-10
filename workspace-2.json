@@ -1,0 +1,25 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "normal",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 1161,
+       "width": 956,
+       "x": 972,
+       "y": 28
+    },
+    "name": "New Tab - Google Chrome",
+    "percent": 1,
+    "swallows": [
+       {
+       // "class": "^google\\-chrome$",
+       // "instance": "^google\\-chrome$",
+       // "title": "^New\\ Tab\\ \\-\\ Google\\ Chrome$",
+       // "transient_for": "^$",
+       // "window_role": "^browser$"
+       }
+    ],
+    "type": "con"
+}
+

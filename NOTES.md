@@ -13,6 +13,23 @@ Goto GitHub and create the new repository
     goto https://github.com/jeffskinnerbox
     <create empty repository called '.i3'>
 
+### Intall i3
+Make sure you using the latest version of i3 via `i3wm.org` site:
+
+```bash
+# make sure you have the latest linux packages
+sudo apt-get update && sudo apt-get dist-upgrade
+
+# this ubuntu repository is provides the latest stable release of i3
+sudo echo "deb http://debian.sur5r.net/i3/ $(lsb_release -c -s) universe" >> /etc/apt/sources.list
+sudo apt-get update
+sudo apt-get --allow-unauthenticated install sur5r-keyring
+sudo apt-get update
+
+# install i3
+sudo apt-get install i3
+```
+
 ### Creating the Local Git Repository
 Make the .i3 directory, move into it, and initialize it as a git repository
 

@@ -2,19 +2,20 @@
 # Version:      0.1.0
 #
 # DESCRIPTION:
-# i3 config file (v4)
+#   i3 config file (v4)
 #
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+#   Please see http://i3wm.org/docs/userguide.html for a complete reference!
 #
 # NOTE:
-# Should you change your keyboard layout at some point,
-# delete this file and re-run i3-config-wizard.
+#   Should you change your keyboard layout at some point,
+#   delete this file and re-run i3-config-wizard.
 #
-# Use this ste to find colors - http://www.infobyip.com/htmlcolorpicker.php
+#   Use this ste to find colors - http://www.infobyip.com/htmlcolorpicker.php
 
 
 
 # ---------------------------- General Environment -----------------------------
+# $mod is the configuration modifier
 # Mod1 = Alt,  Mod2 =  , Mod3 =  , Mod4 = Super/Win
 set $mod Mod1
 
@@ -47,76 +48,79 @@ font -dosemu-vga-medium-r-normal--17-160-75-75-c-80-ibm-cp866        # we want t
 floating_modifier $mod
 
 # start a terminal
-#bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
 bindsym $mod+Return exec --no-startup-id gnome-terminal
-
-# kill focused window
-bindsym $mod+Shift+q kill
 
 # lock screen
 bindsym Control+mod1+l exec --no-startup-id i3lock
 
-# start dmenu (a program launcher)
+
+
+# ------------------- Opening Applications / Closing Windows -------------------
+# start dmenu (a program launcher, app must be within $PATH)
 bindsym $mod+d exec --no-startup-id dmenu_run
+
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
-# change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+# close or kill focused window
+bindsym $mod+q close                       # close focused window
+bindsym $mod+Shift+q kill                  # forcibly kill focused window
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+
+
+# ----------------------------- Change Window Focus ----------------------------
+# change focus with default keys
+bindsym $mod+j focus left                  # focus is moved to left window
+bindsym $mod+k focus down                  # focus is moved to down window
+bindsym $mod+l focus upa                   # focus is moved to up window
+bindsym $mod+semicolon focus right         # focus is moved to right window
+
+# alternatively, you can use the cursor keys
+bindsym $mod+Left focus left               # focus is moved to left window
+bindsym $mod+Down focus down               # focus is moved to down window
+bindsym $mod+Up focus up                   # focus is moved to up window
+bindsym $mod+Right focus right             # focus is moved to right window
+
+bindsym $mod+a focus parent                # focus the parent container
+#bindsym $mod+d focus child                 # focus the child container
 
 
 
 # --------------------------- Move Position of Window --------------------------
-# move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+# move window with default keys
+bindsym $mod+Shift+j move left             # move the window left
+bindsym $mod+Shift+k move down             # move the window down
+bindsym $mod+Shift+l move up               # move the window up
+bindsym $mod+Shift+semicolon move right    # move the window right
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+# alternatively, you can use the cursor keys
+bindsym $mod+Shift+Left move left          # move the window left
+bindsym $mod+Shift+Down move down          # move the window down
+bindsym $mod+Shift+Up move up              # move the window up
+bindsym $mod+Shift+Right move right        # move the window right
 
 
 
-# split in horizontal orientation
-bindsym $mod+h split h
-
-# split in vertical orientation
-bindsym $mod+v split v
+# ------------------------- Container / Window Layout --------------------------
+# split orientation
+bindsym $mod+h split h                     # split horizontal
+bindsym $mod+v split v                     # split vertical
 
 # toggle fullscreen mode for the focused container
 bindsym $mod+f fullscreen
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+s layout stacking       # windows are stacked on the display
+bindsym $mod+w layout tabbed         # windows are tabs accross top of display
+bindsym $mod+e layout toggle split   # windows split up  accross display
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
-
-# focus the parent container
-bindsym $mod+a focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
 
 
 
@@ -154,12 +158,15 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 
 
+# --------------------------- Function Key Bindings ----------------------------
+bindsym $mod+F1 exec --no-startup-id firefox
+bindsym $mod+F2 exec --no-startup-id google-chrome
+
+
+
 # scratchpad
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
-
-# function key binding
-bindsym $mod+F1 exec --no-startup-id firefox
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -252,6 +259,9 @@ bar {
 ## * selected area... (click and move mouse)
 #bindsym --release Shift+Print exec --no-startup-id scrot -s '%Y-%m-%dT%H%M%S.png' -e 'mv $f ~/Downloads && eog ~/Downloads/$f'
 
+## Take a screenshot upon pressing $mod+x (select an area)
+#bindsym --release $mod+x exec --no-startup-id import /tmp/latest-screenshot.png
+
 
 
 # ----------------------- Set Background and Lock Screen -----------------------
@@ -269,9 +279,11 @@ exec --no-startup-id "feh --bg-scale $HOME/Pictures/Wallpaper/Circuit-Board-Wall
 
 
 # --------------------- Auto-Start Layout and Applications ---------------------
-# start terminal in workspace 1
+# to save workspace 1 layout:  i3-save-tree --workspace 1 > ~/.i3/workspace-1.json
+# for more information:  http://i3wm.org/docs/layout-saving.html
 #exec --no-startup-id i3-msg 'workspace 1; exec --no-startup-id gnome-terminal'
 exec --no-startup-id "i3-msg 'workspace 1; append_layout $HOME/.i3/workspace-1.json'"
+exec --no-startup-id "i3-msg 'workspace 2; append_layout $HOME/.i3/workspace-2.json'"
 
 # start chrome on workspace called 2:Web
 #exec --no-startup-id "i3-msg 'workspace 2:Web; exec --no-startup-id google-chrome https://mail.verizon.com/webmail/driver?nimlet=showmessages&view=emails#mail_Emails_INBOX'"

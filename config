@@ -10,13 +10,13 @@
 #   Should you change your keyboard layout at some point,
 #   delete this file and re-run i3-config-wizard.
 #
-#   Use this ste to find colors - http://www.infobyip.com/htmlcolorpicker.php
+#   Use this site to find colors - http://www.infobyip.com/htmlcolorpicker.php
 
 
 
 # ---------------------------- General Environment -----------------------------
 # $mod is the configuration modifier
-# Mod1 = Alt,  Mod2 =  , Mod3 =  , Mod4 = Super/Win
+# Mod1 = Alt key,  Mod2 =  , Mod3 =  , Mod4 = Super/Win key
 set $mod Mod1
 
 
@@ -26,11 +26,18 @@ set $mod Mod1
 #new_window pixel 1
 #new_float pixel 1
 #hide_edge_borders both
-# class border backgr indicator
+
+# Assign colors         (Border/Background/Text/Indicator).
 #client.focused #9fbc00 #9fbc00 #111111
 #client.unfocused #444444 #444444 #315858
 #client.focused_inactive #444444 #444444 #2c2c2f
 #client.urgent #383a3b #383a3b #ee0000#
+
+# Assign colors         (Border/Background/Text/Indicator).
+#client.focused          #3465A4 #204A87 #EEEEEC #3465A4
+#client.focused_inactive #888A85 #555753 #BABDB6 #888A85
+#client.unfocused        #555753 #2E3436 #BABDB6 #888A85
+#client.urgent           #EF2929 #CC0000 #EEEEEC #EF2929
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -38,21 +45,29 @@ set $mod Mod1
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
-#font pango:DejaVu Sans Mono 10
 #font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 #font -dosemu-vga-medium-r-normal--17-160-75-75-c-80-ibm-cp866
+#font pango:DejaVu Sans Mono 10
+
+font pango:monospace 8
+
+#Use Adobe’s Source Code Pro font as your default font
+#font pango:Source Code Pro 12
 
 
 
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
+# ------------------------ Key Bindings to Executables -------------------------
+# Function Key Bindings
+bindsym $mod+F1 exec --no-startup-id google-chrome
+bindsym $mod+F2 exec --no-startup-id firefox
 
 # start a terminal
+#bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
 bindsym $mod+Return exec --no-startup-id gnome-terminal
 
 # lock screen
-bindsym Control+mod1+l exec --no-startup-id i3lock
-
+#bindsym Control+$mod+l exec --no-startup-id i3lock
+bindsym Control+$mod+l exec --no-startup-id i3lock -eti ~/Pictures/Wallpaper/ZZ-Top-1920x1200.png
 
 
 # ------------------- Opening Applications / Closing Windows -------------------
@@ -64,7 +79,7 @@ bindsym $mod+d exec --no-startup-id dmenu_run
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
-# close or kill focused window
+# close or kill the focused window
 bindsym $mod+q close
 bindsym $mod+Shift+q kill
 
@@ -106,34 +121,30 @@ bindsym $mod+Shift+Right move right
 
 
 
-# ------------------------- Container / Window Layout --------------------------
-# split the container orientation horizontal or vertical
-bindsym $mod+h split h
-bindsym $mod+v split v
+# -------------------------- Floating Dialog Windows ---------------------------
+# While dialogs should open in floating mode by default, many still open in
+# tiling mode.  To change this behaviour, check the dialog's WM_WINDOW_ROLE
+# with xorg-xprop and add the correct rules here.
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [title="Preferences$"] floating enable
+for_window [class="(?i)mplayer"] floating enable
 
-# toggle fullscreen mode for the focused container
-bindsym $mod+f fullscreen
-
-# change container layout (stacked, tabbed, toggle split) on the display
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
-
-# toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
-
+# use tiling mode only for main/chat Skype window and floating of all dialogs
+# Skype main window title looks like this - "alexey.diyan - Skype™"
+for_window [instance="skype" title="^.*?(?<!Skype™)$"] floating enable
+for_window [instance="skype" title="Skype™|Call with|File Transfers"] floating disable
 
 
 # ---------------------- Workspace Controls and Vairables ----------------------
 # As workspaces are defined multiple times in i3, assigning workspace variables can be helpful
-#set $WS1 term
-#set $WS2 web
-#set $WS3 misc
-#set $WS4 media
-#set $WS5 code
+# named workspaces are ordered the way they appeared. When they start with a number,
+# i3 will order them numerically.
+#set $WS1 1:term
+#set $WS2 2:web
+#set $WS3 3:misc
+#set $WS4 4:media
+#set $WS5 5:code
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -146,6 +157,13 @@ bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
+
+# workspaces
+# https://fortawesome.github.io/Font-Awesome/cheatsheet/
+# https://gist.github.com/diyan/6192878
+# 1 work, 2 web, 3 chat, 4 notes, 5 music, 6 vnc/rdp, 7/8 noname, 9 mail, 10 dev
+set $ws9 " 9  "
+bindsym $mod+9 workspace $ws9
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
@@ -161,16 +179,60 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 
 
-# --------------------------- Function Key Bindings ----------------------------
-bindsym $mod+F1 exec --no-startup-id firefox
-bindsym $mod+F2 exec --no-startup-id google-chrome
+# ------------------------- Automatic Back-and-Forth --------------------------
+# For instance: Assume you are on workspace "1: www" and switch to "2: IM" using
+# mod+2 because somebody sent you a message.  You don’t need to remember where
+# you came from now, you can just press $mod+2 again to switch back to "1: www".
+workspace_auto_back_and_forth yes
 
 
 
-# scratchpad
+# ---------------------------- Renaming Workspaces -----------------------------
+# rename the current workspace by prompting the user for the name
+bindsym $mod+r exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
+
+
+
+# ---------------------------- Scratchpad Controls -----------------------------
+# moving and retreving windows from the scratchpad popup in float mode
+# you can return it to tilling mode via toggling float mode = $mod+Shift+Space
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
+
+
+# ------------------------- Container / Window Layout --------------------------
+# split the container in horizontal or vertical orientation
+bindsym $mod+h split h
+bindsym $mod+v split v
+
+# toggle fullscreen mode for the focused container (do again to return to tilled)
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, toggle split) on the display
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+
+
+# ------------------------ Tilling / Floating Controls -------------------------
+# When holding the modifier, you can resize a window by pressing the right mouse button and move mouse.
+# If you hold the shift button as well, the resize will preserve the aspect ratio.
+floating_modifier $mod
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+floating_minimum_size 75 x 50
+floating_maximum_size -1 x -1
+
+
+
+# ---------------------- Reload / Reload / Exit Controls -----------------------
 # reload the configuration file
 bindsym $mod+Shift+c reload
 
@@ -183,7 +245,7 @@ bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'You pressed 
 
 
 # ---------------------------- Resze / Move Windows ----------------------------
-# resize window (you can also use the mouse for that)
+# resize window (you can also use the mouse to drag window boundary)
 mode "resize" {
 # These bindings trigger as soon as you enter the resize mode
         bindsym j resize shrink width 10 px or 10 ppt
@@ -201,16 +263,23 @@ mode "resize" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-bindsym $mod+r mode "resize"
+#bindsym $mod+r mode "resize" <---- being $mod+r being used to rename workspace
 
+
+
+# --------------------------------- Status Bar ---------------------------------
 # Start i3bar to display a workspace bar (plus the system information i3status finds out, if available)
 bar {
-        status_command i3status -c ~/.i3status.conf
+        status_command i3status --config ~/.i3status.conf
         position bottom
+        workspace_buttons yes
+        strip_workspace_numbers no
         font pango:DejaVu Sans Mono, Ionicons, FontAwesome 8
+        separator_symbol "  |  "
         colors {
             background #000000
             statusline #33aaff
+            separator #666666
             focused_workspace #11aaff #005500
             active_workspace #11aaff #005500
             urgent_workspace #ffffff #990000
@@ -221,6 +290,8 @@ bar {
 
 # -------------------- Logout / Suspend / Reboot / Shutdown --------------------
 # http://www.circuidipity.com/i3-tiling-window-manager.html
+#https://wiki.archlinux.org/index.php/i3#Save_and_restore_the_window_layout
+#set $Locker i3lock && sleep 1
 #set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
 #mode "$mode_system" {
 #    bindsym l exec --no-startup-id $Locker, mode "default"
@@ -266,26 +337,46 @@ bar {
 
 
 
-# ----------------------- Set Background and Lock Screen -----------------------
+# ----------------------- Launch Background Applications -----------------------
 # wait 10 minutes of inactivity before launching the screenlocker i3lock
 #exec --no-startup-id xautolock -time 10 -locker i3lock
-exec --no-startup-id xautolock -time 10 -locker 'i3lock --color=806060 --beep --tiling --image $HOME/Pictures/Wallpaper/ZZ-Top-1920x1200.png'
+exec --no-startup-id xautolock -time 10 -locker 'i3lock --color=806060 --beep --tiling --image /home/jeff/Pictures/Wallpaper/ZZ-Top-1920x1200.png'
 
 # set energy star feature to On and wait 2 minutes of inactivity to turn off the screens
-#exec --no-startup-id xset dpms 120
 exec --no-startup-id xset dpms 120
 
 # set the background
-exec --no-startup-id "feh --bg-scale $HOME/Pictures/Wallpaper/Circuit-Board-Wallpaper.png"
-
+#exec --no-startup-id "feh --bg-scale $HOME/Pictures/Wallpaper/Circuit-Board-Wallpaper.png"
+exec --no-startup-id feh --no-xinerama --image-bg black --bg-fill --randomize ~/Pictures/Wallpaper/*
 
 
 # --------------------- Auto-Start Layout and Applications ---------------------
 # to save workspace 1 layout:  i3-save-tree --workspace 1 > ~/.i3/workspace-1.json
 # for more information:  http://i3wm.org/docs/layout-saving.html
 #exec --no-startup-id i3-msg 'workspace 1; exec --no-startup-id gnome-terminal'
+#
+# load layout file into i3
 #exec --no-startup-id "i3-msg 'workspace 1; append_layout $HOME/.i3/workspace-1.json'"
 #exec --no-startup-id "i3-msg 'workspace 2; append_layout $HOME/.i3/workspace-2.json'"
+#exec --no-startup-id "i3-msg 'workspace 3; append_layout $HOME/.i3/workspace-3.json'"
+
+# Test-0 of Auto-Start Layout and Applications
+exec --no-startup-id "i3-msg 'workspace test-0; append_layout /home/jeff/.i3/workspace-4.json'"
+
+# Test-1 of Auto-Start Layout and Applications
+#exec --no-startup-id "i3-msg 'workspace test-1; append_layout /home/jeff/.i3/workspace-4.json'"
+#exec --no-startup-id gnome-terminal
+#exec --no-startup-id gnome-terminal
+#bindsym $mod+F1 exec --no-startup-id google-chrome
+
+# Test-2 of Auto-Start Layout and Applications
+#exec --no-startup-id ~/.i3/load_layout.sh &
+
+# Test-3 of Auto-Start Layout and Applications
+
+# xprop tool can be used to get WM_CLASS, WM_NAME properties
+#assign [class="^gnome-terminal$"] 10
+#exec_always gnome-terminal
 
 # start chrome on workspace called 2:Web
 #exec --no-startup-id "i3-msg 'workspace 2:Web; exec --no-startup-id google-chrome https://mail.verizon.com/webmail/driver?nimlet=showmessages&view=emails#mail_Emails_INBOX'"
@@ -297,3 +388,10 @@ exec --no-startup-id "feh --bg-scale $HOME/Pictures/Wallpaper/Circuit-Board-Wall
 #exec --no-startup-id "i3-msg 'workspace 3:Chat; exec --no-startup-id scudcloud'"
 #exec --no-startup-id "i3-msg 'exec --no-startup-id gnome-terminal'"
 
+
+
+# ----------------------- Launch Foreground Applications -----------------------
+# Launch initial applications in their respective workspaces.
+# See: https://wiki.archlinux.org/index.php/i3#Save_and_restore_the_window_layout
+#exec --no-startup-id ~/.i3/load_chat.sh &
+#exec --no-startup-id ~/.i3/load_term.sh &

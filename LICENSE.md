@@ -1,3 +1,8 @@
+<!--
+Maintainer:   jeffskinnerbox@yahoo.com / www.jeffskinnerbox.me
+Version:      0.4.0
+-->
+
 ![Open Source Logo][logo]
 
 ## [The Open Source Initiative (OSI)][osl], [MIT License (MIT)][mit]

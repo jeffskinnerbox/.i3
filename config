@@ -1,5 +1,5 @@
 # Maintainer:   jeffskinnerbox@yahoo.com / www.jeffskinnerbox.me
-# Version:      0.3.0
+# Version:      0.4.0
 #
 # DESCRIPTION:
 #   i3 config file (v4)
@@ -361,7 +361,7 @@ exec --no-startup-id feh --no-xinerama --image-bg black --bg-fill --randomize ~/
 #exec --no-startup-id "i3-msg 'workspace 3; append_layout $HOME/.i3/workspace-3.json'"
 
 # Test-0 of Auto-Start Layout and Applications
-exec --no-startup-id "i3-msg 'workspace test-0; append_layout /home/jeff/.i3/workspace-4.json'"
+#exec --no-startup-id "i3-msg 'workspace test-0; append_layout /home/jeff/.i3/workspace-4.json'"
 
 # Test-1 of Auto-Start Layout and Applications
 #exec --no-startup-id "i3-msg 'workspace test-1; append_layout /home/jeff/.i3/workspace-4.json'"

@@ -48,3 +48,4 @@ stuff sufficiently challenging, who needs all this legal mumbo jumbo!
 [gpl]:http://www.gnu.org/licenses/gpl.html
 [osl]:http://opensource.org/licenses
 [logo]:http://opensource.org/trademarks/opensource/OSI-logo-100x117.png
+

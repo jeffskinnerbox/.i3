@@ -70,7 +70,6 @@
     },
     "name": "Inbox (3) - jeff.irland@gmail.com - Gmail - Google Chrome",
     "percent": 0.5,
-    "swallows": [
        {
        "class": "^google-chrome$",
        "instance": "^google-chrome$",

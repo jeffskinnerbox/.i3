@@ -19,3 +19,4 @@ i3-msg "workspace test-2; append_layout ~/.i3/workspace-4.json"
 (gnome-terminal &)
 (google-chrome &)
 
+

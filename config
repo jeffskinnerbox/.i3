@@ -162,8 +162,9 @@ bindsym $mod+0 workspace 10
 # https://fortawesome.github.io/Font-Awesome/cheatsheet/
 # https://gist.github.com/diyan/6192878
 # 1 work, 2 web, 3 chat, 4 notes, 5 music, 6 vnc/rdp, 7/8 noname, 9 mail, 10 dev
-set $ws9 " 9  "
-bindsym $mod+9 workspace $ws9
+######## this doesn't work correctly #############
+#set $ws9 " 9  "
+#bindsym $mod+9 workspace $ws9
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
@@ -236,7 +237,7 @@ floating_maximum_size -1 x -1
 # reload the configuration file
 bindsym $mod+Shift+c reload
 
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+# restart i3 in place (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
@@ -326,7 +327,7 @@ bar {
 # -------------------------------- Screenshots ---------------------------------
 # Take screenshots using scrot and eog displays images: sudo apt-get install scrot eog
 ## * desktop
-#bindsym --release Print exec --no-startup-id scrot '%Y-%m-%dT%H%M%S.png' -e 'mv $f ~/Downloads && eog ~/Downloads/$f'
+#bindsym --release Print exec --no-startup-id scrot '%Y-%m-%dT%H%M%S.p#ng' -e 'mv $f ~/Downloads && eog ~/Downloads/$f'
 ## * active Window
 #bindsym --release $mod+Print exec --no-startup-id scrot -d 4 -u -z '%Y-%m-%dT%H%M%S.png' -e 'mv $f ~/Downloads && eog ~/Downloads/$f'
 ## * selected area... (click and move mouse)
@@ -340,14 +341,16 @@ bar {
 # ----------------------- Launch Background Applications -----------------------
 # wait 10 minutes of inactivity before launching the screenlocker i3lock
 #exec --no-startup-id xautolock -time 10 -locker i3lock
-exec --no-startup-id xautolock -time 10 -locker 'i3lock --color=806060 --beep --tiling --image /home/jeff/Pictures/Wallpaper/ZZ-Top-1920x1200.png'
+#exec --no-startup-id xautolock -time 10 -locker 'i3lock --color=806060 --beep --tiling --image /home/jeff/Pictures/Wallpaper/ZZ-Top-1920x1200.png'
+exec --no-startup-id xautolock -time 10 -locker 'i3lock --color=806060 --beep --tiling --image $HOME/Pictures/Wallpaper/ZZ-Top-1920x1200.png'
 
 # set energy star feature to On and wait 2 minutes of inactivity to turn off the screens
 exec --no-startup-id xset dpms 120
 
 # set the background
 #exec --no-startup-id "feh --bg-scale $HOME/Pictures/Wallpaper/Circuit-Board-Wallpaper.png"
-exec --no-startup-id feh --no-xinerama --image-bg black --bg-fill --randomize ~/Pictures/Wallpaper/*
+#exec --no-startup-id feh --no-xinerama --image-bg black --bg-fill --randomize ~/Pictures/Wallpaper/*
+exec --no-startup-id feh --no-xinerama --image-bg black --bg-fill $HOME/Pictures/Wallpaper/i3-wallpaper-1.png
 
 
 # --------------------- Auto-Start Layout and Applications ---------------------
@@ -395,3 +398,4 @@ exec --no-startup-id feh --no-xinerama --image-bg black --bg-fill --randomize ~/
 # See: https://wiki.archlinux.org/index.php/i3#Save_and_restore_the_window_layout
 #exec --no-startup-id ~/.i3/load_chat.sh &
 #exec --no-startup-id ~/.i3/load_term.sh &
+#

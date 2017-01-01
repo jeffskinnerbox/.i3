@@ -1,10 +1,10 @@
 # Maintainer:   jeffskinnerbox@yahoo.com / www.jeffskinnerbox.me
-# Version:      0.4.0
+# Version:      0.5.0
 #
 # DESCRIPTION:
 #   i3 config file (v4)
 #
-#   Please see http://i3wm.org/docs/userguide.html for a complete reference!
+#   See http://i3wm.org/docs/userguide.html for a complete reference!
 #
 # NOTE:
 #   Should you change your keyboard layout at some point,
@@ -16,7 +16,9 @@
 
 # ---------------------------- General Environment -----------------------------
 # $mod is the configuration modifier
-# Mod1 = Alt key,  Mod2 =  , Mod3 =  , Mod4 = Super/Win key
+# Mod1 = Alt key,  Mod2 = NumLock, Mod3 = ussually unassigned for US keyboard,
+# Mod4 = Super or Win key, Mod5 = Mode Shift
+# use "xmodmap -pm" on command line to get a listing
 set $mod Mod1
 
 
@@ -58,8 +60,40 @@ font pango:monospace 8
 
 # ------------------------ Key Bindings to Executables -------------------------
 # Function Key Bindings
+# create floating Chrome window
 bindsym $mod+F1 exec --no-startup-id google-chrome
+for_window [class="Google-chrome"] floating enable
+for_window [class="Google-chrome"] border pixel 5
+
+# create floating FireFox window
 bindsym $mod+F2 exec --no-startup-id firefox
+for_window [class="Firefox"] floating enable
+for_window [class="Firefox"] border pixel 5
+
+# this will not work - Multiple Instances of Gnome Terminal - https://chrisirwin.ca/posts/multiple-instances-of-gnome-terminal/
+#bindsym $mod+F3 exec --no-startup-id gnome-terminal --name=floater
+#for_window [class="Gnome-terminal" instance="floater"] floating enable border pixel 3
+
+# create floating and sticky terminal window
+#bindsym $mod+F4 exec --no-startup-id xterm -class Floater -geometry 104x28+363+440 -bg darkgray
+#for_window [class="Floater"] floating enable
+#for_window [class="Floater"] sticky enable
+
+# create floating and sticky terminal window
+#bindsym $mod+F4 exec --no-startup-id terminator --class Floater --geometry=104x28+363+440
+#for_window [class="Floater"] floating enable
+#for_window [class="Floater"] sticky enable
+
+# create floating file manager window
+bindsym $mod+F4 exec --no-startup-id krusader
+for_window [class="Krusader"] floating enable              # file manager
+for_window [class="Krusader"] border pixel 5
+#for_window [class="Krusader"] sticky enable
+
+# create floating and sticky terminal window
+bindsym $mod+F5 exec --no-startup-id rxvt -bg gray -geometry 104x28+363+440 -fadecolor black -fade 50
+for_window [class="URxvt"] floating enable
+for_window [class="URxvt"] sticky enable
 
 # start a terminal
 #bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
@@ -67,7 +101,8 @@ bindsym $mod+Return exec --no-startup-id gnome-terminal
 
 # lock screen
 #bindsym Control+$mod+l exec --no-startup-id i3lock
-bindsym Control+$mod+l exec --no-startup-id i3lock -eti ~/Pictures/Wallpaper/ZZ-Top-1920x1200.png
+bindsym Control+$mod+l exec --no-startup-id i3lock -eti $HOME/Pictures/Wallpaper/ZZ-Top-1920x1200.png
+
 
 
 # ------------------- Opening Applications / Closing Windows -------------------
@@ -80,7 +115,7 @@ bindsym $mod+d exec --no-startup-id dmenu_run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # close or kill the focused window
-bindsym $mod+q close
+bindsym $mod+q close                    # this doesn't seem to work, get error message
 bindsym $mod+Shift+q kill
 
 
@@ -121,19 +156,38 @@ bindsym $mod+Shift+Right move right
 
 
 
-# -------------------------- Floating Dialog Windows ---------------------------
+# ----------------------------- Floating Windows -------------------------------
 # While dialogs should open in floating mode by default, many still open in
 # tiling mode.  To change this behaviour, check the dialog's WM_WINDOW_ROLE
-# with xorg-xprop and add the correct rules here.
-for_window [window_role="pop-up"] floating enable
-for_window [window_role="task_dialog"] floating enable
-for_window [title="Preferences$"] floating enable
-for_window [class="(?i)mplayer"] floating enable
+# or WM_CLASS with the Xorg utility xprop and add the correct rules here.
+for_window [window_role="pop-up"] floating enable          # pop-up window
+for_window [window_role="task_dialog"] floating enable     # dialog window
+for_window [title="Preferences$"] floating enable          # preferances window
+for_window [class="(?i)mplayer"] floating enable           # music player
+for_window [class="XTerm"] floating enable                 # terminal window
+for_window [class="URxvt"] floating enable                 # terminal window
+for_window [class="Nautilus"] floating enable              # file manager
+for_window [class="Krusader"] floating enable              # file manager
+for_window [class="Eog"] floating enable                   # image file
+for_window [class="Evince"] floating enable                # PDF file
+for_window [class="Totem"] floating enable                 # video file
+for_window [class="libreoffice-impress"] floating enable   # LibreOffice file
+for_window [class="libreoffice-writer"] floating enable    # LibreOffice file
+for_window [class="libreoffice-calc"] floating enable      # LibreOffice file
+for_window [class="VirtualBox"] floating enable            # VirtualBox window
+
+# doesn't seem to work
+for_window [class="googlesmm"] floating enable             # Google's Music Manager
+
+# have window stay on screen even if you switch to another workspace
+for_window [class="XTerm"] sticky enable
+#for_window [class="Nautilus"] sticky enable
 
 # use tiling mode only for main/chat Skype window and floating of all dialogs
 # Skype main window title looks like this - "alexey.diyan - Skype™"
 for_window [instance="skype" title="^.*?(?<!Skype™)$"] floating enable
 for_window [instance="skype" title="Skype™|Call with|File Transfers"] floating disable
+
 
 
 # ---------------------- Workspace Controls and Vairables ----------------------
@@ -208,12 +262,19 @@ bindsym $mod+h split h
 bindsym $mod+v split v
 
 # toggle fullscreen mode for the focused container (do again to return to tilled)
-bindsym $mod+f fullscreen
+bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split) on the display
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
+
+
+
+# ------------------------------- Jump to Window -------------------------------
+# Get me to the next open VIM instance
+# https://i3wm.org/docs/userguide.html#_jumping_to_specific_windows
+#bindsym $mod+b [title="Vim"] focus
 
 
 
@@ -228,8 +289,9 @@ bindsym $mod+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
-floating_minimum_size 75 x 50
-floating_maximum_size -1 x -1
+# min and max size of floating windows (width x height)
+floating_minimum_size 120 x 110
+floating_maximum_size 1200 x 1100    # use -1 x -1 for unconstrained size
 
 
 
@@ -240,7 +302,7 @@ bindsym $mod+Shift+c reload
 # restart i3 in place (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
-# exit i3 (logs you out of your X session)
+# exit i3 (aka logs you out of your X session)
 bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 
@@ -265,6 +327,9 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 #bindsym $mod+r mode "resize" <---- being $mod+r being used to rename workspace
+
+# Move floating container to the center of all outputs
+bindsym $mod+c move absolute position center
 
 
 
@@ -309,87 +374,37 @@ bar {
 
 
 
-
 # ------------------------ Arrange Containers / Windows ------------------------
 # Layout mode for new containers
 #workspace_layout tabbed
 
-# Enable floating mode
-#for_window [class="Remmina"] floating enable
-#for_window [class="Remmina"] border normal
-#for_window [class="VirtualBox"] floating enable
-#for_window [class="VirtualBox"] border normal
-#for_window [class="Vlc"] floating enable
-#for_window [class="Vlc"] border normal
+
+
+# ----------------------------- Screenshots Tools ------------------------------
+# To see the image captured, use feh ~/.i3/latest-screenshot.png or eog ~/.i3/latest-screenshot.png
+
+# Take a screenshot of entire desktop
+bindsym --release Print exec --no-startup-id import -window root $HOME/.i3/latest-screenshot.png
+
+# Take a screenshot of active window ...(put mouse in window and then click mouse)
+# Take a screenshot of selected area...(click and drag mouse)
+bindsym --release Shift+Print exec --no-startup-id import $HOME/.i3/latest-screenshot.png
 
 
 
-# -------------------------------- Screenshots ---------------------------------
-# Take screenshots using scrot and eog displays images: sudo apt-get install scrot eog
-## * desktop
-#bindsym --release Print exec --no-startup-id scrot '%Y-%m-%dT%H%M%S.p#ng' -e 'mv $f ~/Downloads && eog ~/Downloads/$f'
-## * active Window
-#bindsym --release $mod+Print exec --no-startup-id scrot -d 4 -u -z '%Y-%m-%dT%H%M%S.png' -e 'mv $f ~/Downloads && eog ~/Downloads/$f'
-## * selected area... (click and move mouse)
-#bindsym --release Shift+Print exec --no-startup-id scrot -s '%Y-%m-%dT%H%M%S.png' -e 'mv $f ~/Downloads && eog ~/Downloads/$f'
-
-## Take a screenshot upon pressing $mod+x (select an area)
-#bindsym --release $mod+x exec --no-startup-id import /tmp/latest-screenshot.png
-
-
-
-# ----------------------- Launch Background Applications -----------------------
-# wait 10 minutes of inactivity before launching the screenlocker i3lock
-#exec --no-startup-id xautolock -time 10 -locker i3lock
-#exec --no-startup-id xautolock -time 10 -locker 'i3lock --color=806060 --beep --tiling --image /home/jeff/Pictures/Wallpaper/ZZ-Top-1920x1200.png'
-exec --no-startup-id xautolock -time 10 -locker 'i3lock --color=806060 --beep --tiling --image $HOME/Pictures/Wallpaper/ZZ-Top-1920x1200.png'
-
-# set energy star feature to On and wait 2 minutes of inactivity to turn off the screens
-exec --no-startup-id xset dpms 120
-
-# set the background
+# -------------------------- Screen Display Wallpaper --------------------------
+# set the background to some wallpaper
 #exec --no-startup-id "feh --bg-scale $HOME/Pictures/Wallpaper/Circuit-Board-Wallpaper.png"
 #exec --no-startup-id feh --no-xinerama --image-bg black --bg-fill --randomize ~/Pictures/Wallpaper/*
 exec --no-startup-id feh --no-xinerama --image-bg black --bg-fill $HOME/Pictures/Wallpaper/i3-wallpaper-1.png
 
 
-# --------------------- Auto-Start Layout and Applications ---------------------
-# to save workspace 1 layout:  i3-save-tree --workspace 1 > ~/.i3/workspace-1.json
-# for more information:  http://i3wm.org/docs/layout-saving.html
-#exec --no-startup-id i3-msg 'workspace 1; exec --no-startup-id gnome-terminal'
-#
-# load layout file into i3
-#exec --no-startup-id "i3-msg 'workspace 1; append_layout $HOME/.i3/workspace-1.json'"
-#exec --no-startup-id "i3-msg 'workspace 2; append_layout $HOME/.i3/workspace-2.json'"
-#exec --no-startup-id "i3-msg 'workspace 3; append_layout $HOME/.i3/workspace-3.json'"
 
-# Test-0 of Auto-Start Layout and Applications
-#exec --no-startup-id "i3-msg 'workspace test-0; append_layout /home/jeff/.i3/workspace-4.json'"
-
-# Test-1 of Auto-Start Layout and Applications
-#exec --no-startup-id "i3-msg 'workspace test-1; append_layout /home/jeff/.i3/workspace-4.json'"
-#exec --no-startup-id gnome-terminal
-#exec --no-startup-id gnome-terminal
-#bindsym $mod+F1 exec --no-startup-id google-chrome
-
-# Test-2 of Auto-Start Layout and Applications
-#exec --no-startup-id ~/.i3/load_layout.sh &
-
-# Test-3 of Auto-Start Layout and Applications
-
-# xprop tool can be used to get WM_CLASS, WM_NAME properties
-#assign [class="^gnome-terminal$"] 10
-#exec_always gnome-terminal
-
-# start chrome on workspace called 2:Web
-#exec --no-startup-id "i3-msg 'workspace 2:Web; exec --no-startup-id google-chrome https://mail.verizon.com/webmail/driver?nimlet=showmessages&view=emails#mail_Emails_INBOX'"
-#exec --no-startup-id "i3-msg 'exec --no-startup-id google-chrome https://mail.google.com/mail/u/0/#inbox'"
-#exec --no-startup-id "i3-msg 'exec --no-startup-id google-chrome https://us-mg5.mail.yahoo.com/neo/launch?.rand=55clqanieh50a https://getpocket.com/a/queue/'"
-#exec --no-startup-id "i3-msg 'exec --no-startup-id google-chrome https://makersmiths.slack.com/messages/general/ http://google.com'"
-
-# start slack and a terminal on workspace called 3:Chat
-#exec --no-startup-id "i3-msg 'workspace 3:Chat; exec --no-startup-id scudcloud'"
-#exec --no-startup-id "i3-msg 'exec --no-startup-id gnome-terminal'"
+# ----------------------- Launch Background Applications -----------------------
+# set energy star feature to On and wait 2 minutes of inactivity to turn off the screens
+# wait 10 minutes of inactivity before launching the screenlocker i3lock
+exec --no-startup-id xset dpms 120
+exec --no-startup-id xautolock -time 10 -locker 'i3lock --color=806060 --beep --tiling --image $HOME/Pictures/Wallpaper/ZZ-Top-1920x1200.png'
 
 
 
@@ -398,4 +413,54 @@ exec --no-startup-id feh --no-xinerama --image-bg black --bg-fill $HOME/Pictures
 # See: https://wiki.archlinux.org/index.php/i3#Save_and_restore_the_window_layout
 #exec --no-startup-id ~/.i3/load_chat.sh &
 #exec --no-startup-id ~/.i3/load_term.sh &
-#
+
+
+
+# --------------------- Auto-Start Layout and Applications ---------------------
+# to save workspace 1's layout, use i3-save-tree --workspace 1 > ~/.i3/workspace-1.json
+# for more information:  http://i3wm.org/docs/layout-saving.html
+
+# xprop tool can be used to get WM_CLASS, WM_NAME properties
+#assign [class="^gnome-terminal$"] 10
+#exec_always gnome-terminal
+
+# workspace called 1
+#exec --no-startup-id "i3-msg workspace 1; exec gnome-terminal"
+#exec --no-startup-id "i3-msg workspace 1; exec nautilus --browser $HOME"
+exec --no-startup-id "i3-msg workspace 1; exec krusader"
+
+# workspace called 2:Web
+#exec --no-startup-id "i3-msg 'workspace 2:Web; exec --no-startup-id google-chrome https://i3wm.org/docs/userguide.html; exec --no-startup-id gnome-terminal'"
+exec --no-startup-id "i3-msg workspace 2:Web"
+#assign [class="^Google-chrome$"] → 2:Web
+exec --no-startup-id i3-msg "workspace 2:Web; exec google-chrome https://getpocket.com/a/queue/"
+exec --no-startup-id i3-msg "workspace 2:Web; exec gnome-terminal"
+exec --no-startup-id i3-msg "workspace 2:Web; exec gnome-terminal"
+
+# workspace called 3:Chat
+#exec --no-startup-id "i3-msg 'workspace 3:Chat; exec --no-startup-id scudcloud; exec --no-startup-id gnome-terminal'"
+#exec --no-startup-id "i3-msg workspace 3:Chat"
+#exec --no-startup-id "i3-msg exec --no-startup-id scudcloud"
+#exec --no-startup-id "i3-msg exec --no-startup-id gnome-terminal"
+exec --no-startup-id "i3-msg workspace 3:Chat"
+assign [class="^Scudcloud$"] → 3:Chat
+exec --no-startup-id "i3-msg 'workspace 3:Chat; exec scudcloud'"
+exec --no-startup-id "i3-msg 'workspace 3:Chat; exec gnome-terminal'"
+
+# workspace called 4:Blog
+exec --no-startup-id "i3-msg workspace 4:Blog"
+exec --no-startup-id i3-msg "workspace 4:Blog; exec gnome-terminal --working-directory='/home/jeff/blogging/content/ideas/'"
+exec --no-startup-id i3-msg "workspace 4:Blog; exec gnome-terminal --working-directory='/home/jeff/blogging/content/ideas/'"
+exec --no-startup-id i3-msg "workspace 4:Blog; exec --no-startup-id google-chrome --new-window https://openwrt.org/"
+
+# workspace called 5:i3-Dev
+#exec --no-startup-id "i3-msg 'workspace 5:i3-Dev; append_layout /home/jeff/.i3/workspace-5.json'"
+exec --no-startup-id "i3-msg workspace 5:i3-Dev"
+exec --no-startup-id i3-msg "workspace 5:i3-Dev; exec gnome-terminal"
+exec --no-startup-id i3-msg "workspace 5:i3-Dev; exec gnome-terminal --working-directory='/home/jeff/.i3/' --execute vim -p config README.md"
+exec --no-startup-id i3-msg "workspace 5:i3-Dev; exec google-chrome --new-window https://i3wm.org/docs/userguide.html"
+
+# go back to workspace 1
+#exec --no-startup-id "i3-msg workspace 1"
+exec --no-startup-id i3-msg "workspace 1"
+

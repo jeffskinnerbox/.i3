@@ -1,7 +1,12 @@
 <!--
 Maintainer:   jeffskinnerbox@yahoo.com / www.jeffskinnerbox.me
-Version:      0.4.0
+Version:      0.5.0
 -->
+
+Dropbox
+exec dropbox start
+http://hiankun.blogspot.com/2013/05/i3-tiling-window-manager.html
+
 
 # i3 Window Manager
 The i3 [tiling window manager][01] is a nice modern tiling window manager that
@@ -47,6 +52,16 @@ i3 is highly configruable and not dogmatic about tiling geometry and lets you ha
 # Relavent Tools and Background
 
 ## Tools to Help Discover Key Names and Window Properties
+[`xmodmap`][] is a utility for modifying keymaps
+and pointer button mappings in X Window.
+Use `xmodmap -pm` to get a listing of the the i3 modifiers Mod1 to Mod5.
+
+[`xwininfo`][] is a X Window utility for displaying information
+(e.g. location, width, height, geometry, etc.) about windows.
+The user has the option of selecting the target window with the mouse
+(by clicking any mouse button in the desired window)
+or by specifying its window id on the command line with the `-id` option.
+
 Keynames are not always consistent on keyboards,
 so you can find the correct keynames with the [`xev`][06] command
 (contained in the `x11-utils` package).
@@ -509,6 +524,7 @@ http://unix.stackexchange.com/questions/134980/how-do-you-implement-layout-with-
 ## Cheatsheets
 http://i3wm.org/docs/refcard.pdf
 http://www.cheatography.com/davechild/cheat-sheets/i3-window-manager/
+http://walther.io/getting-started-and-going-further-with-i3-window-manager/
 
 * General
     * `startx i3` start i3 from command line
@@ -536,6 +552,14 @@ Here are just a few:
 
 * [I3pystatus](https://github.com/enkore/i3pystatus) is a replacement for the status bar that’s extensible in Python.
 * There’s also [QuickSwitch](https://github.com/proxypoke/quickswitch-for-i3) which is a utility to help you find and control windows in i3.
+
+# File Manager - Krusader
+Nautilus - doesn't behave properly
+Midnight Commander - mc - very light weight - can't make it float, wants to be in terminal window - https://en.wikipedia.org/wiki/Midnight_Commander
+Krusader -  heavy but ok - behaves nicely behaves like Midnight Commander but graphical - https://en.wikipedia.org/wiki/Krusader
+
+* [Orthodox File Manager (OFM) paradigm](https://en.wikipedia.org/wiki/File_manager)
+* [The Krusader Handbook](https://krusader.org/documentation/)
 
 ----
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Maintainer:   jeffskinnerbox@yahoo.com / www.jeffskinnerbox.me
-# Version:      0.4.0
+# Version:      0.5.0
 #
 # DESCRIPTION:
 #   i3 execution file to help with debugging

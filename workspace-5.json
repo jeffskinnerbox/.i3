@@ -1,0 +1,89 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "normal",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 383,
+       "width": 652,
+       "x": 0,
+       "y": 0
+    },
+    "name": "desktop Vim Editor: /home/jeff/.i3/config",
+    "percent": 0.5,
+    "swallows": [
+       {
+       "class": "^Gnome\\-terminal$",
+       "instance": "^gnome\\-terminal\\-server$",
+       "title": "^desktop\\ Vim\\ Editor\\:\\ \\/home\\/jeff\\/\\.i3\\/config$",
+       "transient_for": "^$",
+       "window_role": "^gnome\\-terminal\\-window\\-a8e7d4d8\\-1453\\-485e\\-9081\\-f6ad65e0e504$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "normal",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 383,
+       "width": 652,
+       "x": 0,
+       "y": 0
+    },
+    "name": "jeff@desktop - /home/jeff",
+    "percent": 0.5,
+    "swallows": [
+       {
+       "class": "^Gnome\\-terminal$",
+       "instance": "^gnome\\-terminal\\-server$",
+       "title": "^jeff\\@desktop\\ \\-\\ \\/home\\/jeff$",
+       "transient_for": "^$",
+       "window_role": "^gnome\\-terminal\\-window\\-2a8f151e\\-6ee3\\-4f98\\-b864\\-26012a24a444$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    // floating_con with 1 children
+    "border": "normal",
+    "floating": "auto_off",
+    "layout": "splith",
+    "percent": null,
+    "rect": {
+       "height": 1096,
+       "width": 936,
+       "x": 971,
+       "y": 69
+    },
+    "type": "floating_con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 5,
+            "floating": "user_on",
+            "geometry": {
+               "height": 1086,
+               "width": 926,
+               "x": 192,
+               "y": 74
+            },
+            "name": "i3: i3 User’s Guide - Google Chrome",
+            "percent": 1,
+            "swallows": [
+               {
+               "class": "^Google\\-chrome$",
+               "instance": "^google\\-chrome$",
+               "title": "^i3\\:\\ i3\\ User\\’s\\ Guide\\ \\-\\ Google\\ Chrome$",
+               "transient_for": "^$",
+               "window_role": "^browser$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+

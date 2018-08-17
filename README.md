@@ -1,11 +1,13 @@
 <!--
 Maintainer:   jeffskinnerbox@yahoo.com / www.jeffskinnerbox.me
-Version:      0.5.0
+Version:      0.6.0
 -->
 
 Dropbox
 exec dropbox start
 http://hiankun.blogspot.com/2013/05/i3-tiling-window-manager.html
+
+* [5 reasons the i3 window manager makes Linux better](https://opensource.com/article/18/8/i3-tiling-window-manager)
 
 
 # i3 Window Manager

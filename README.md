@@ -3,11 +3,15 @@ Maintainer:   jeffskinnerbox@yahoo.com / www.jeffskinnerbox.me
 Version:      0.6.0
 -->
 
-Dropbox
-exec dropbox start
-http://hiankun.blogspot.com/2013/05/i3-tiling-window-manager.html
 
-* [5 reasons the i3 window manager makes Linux better](https://opensource.com/article/18/8/i3-tiling-window-manager)
+<div align="center">
+<img src="http://www.foxbyrd.com/wp-content/uploads/2018/02/file-4.jpg" title="These materials require additional work and are not ready for general use." align="center">
+</div>
+
+
+
+
+----
 
 
 # i3 Window Manager
@@ -48,6 +52,21 @@ that is open source and very well documented.
 It supports tiling, stacking, tabs, virtual desktops, and multiple monitors.
 You can do almost everything from the keyboard, or mix up keyboard and mouse.
 i3 is highly configruable and not dogmatic about tiling geometry and lets you have it your way.
+
+http://hiankun.blogspot.com/2013/05/i3-tiling-window-manager.html
+
+* [5 reasons the i3 window manager makes Linux better](https://opensource.com/article/18/8/i3-tiling-window-manager)
+
+# Alternative to i3
+As an alternative to i3, consider [`bspwm`][25].
+There are a few reasons I decided to try it out:
+
+* It is only a window manager.
+* It is managed by a few easy-to-configure scripts.
+* It supports gaps between windows by default.
+
+* [Why I love using bspwm for my Linux window manager](https://opensource.com/article/21/4/bspwm-linux)
+* [Tiling window managers](http://tanguy.ortolo.eu/blog/article85/tiling-wm)
 
 ----
 
@@ -617,7 +636,7 @@ If your lucky, you may find a few additional gems you can add to your i3 configu
 [22]:http://askubuntu.com/questions/150487/what-happens-under-the-covers-to-log-me-in-and-start-up-unity-or-another-graphic?r
 [23]:https://linuxcritic.wordpress.com/2010/04/07/anatomy-of-a-desktop-file/
 [24]:https://faq.i3wm.org/question/18/how-do-xsession-xinitrc-and-i3config-play-together.1.html
-[25]:
+[25]:https://github.com/baskerville/bspwm
 [26]:
 [27]:
 [28]:
